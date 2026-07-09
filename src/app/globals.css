@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0b0b0c;
+  --color-ink-soft: #201f22;
+  --color-paper: #f7f4f0;
+  --color-paper-dim: #ece6dd;
+  --color-pink: #ef0f76;
+  --color-pink-deep: #b30c59;
+  --color-pink-soft: #fbd2e6;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-pink: var(--color-pink);
+  --color-pink-deep: var(--color-pink-deep);
+  --color-pink-soft: var(--color-pink-soft);
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  cursor: none;
+}
+
+@media (pointer: coarse), (hover: none) {
+  * {
+    cursor: auto;
+  }
+}
+
+html {
+  background: var(--color-ink);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans), sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: var(--color-paper);
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.viewfinder {
+  position: relative;
+}
+.viewfinder::before,
+.viewfinder::after,
+.viewfinder > .vf-tr,
+.viewfinder > .vf-bl {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--color-pink);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.viewfinder::before {
+  top: 10px;
+  left: 10px;
+  border-top: 2px solid var(--color-pink);
+  border-left: 2px solid var(--color-pink);
+  transform: translate(6px, 6px);
+}
+.viewfinder::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 2px solid var(--color-pink);
+  border-right: 2px solid var(--color-pink);
+  transform: translate(-6px, -6px);
+}
+.viewfinder:hover::before,
+.viewfinder:hover::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
